@@ -19117,11 +19117,12 @@ var page = require('page');
 require('./homepage');
 require('./signup');
 require('./signin');
+require('./user-page');
 require('./footer');
 
 page(); //o page.start()
 
-},{"./footer":368,"./homepage":370,"./signin":376,"./signup":378,"babel-polyfill":20,"page":350}],373:[function(require,module,exports){
+},{"./footer":368,"./homepage":370,"./signin":376,"./signup":378,"./user-page":383,"babel-polyfill":20,"page":350}],373:[function(require,module,exports){
 'use strict';
 
 var _templateObject = _taggedTemplateLiteral(['<div class="container landing">\n     <div class="row">\n           <div class="col s10 push-s1">\n               <div class="row">\n                   <div class="col m5 hide-on-small-only">\n                       <img class="iphone" src="iphone.png">\n                   </div>\n                   ', '\n              </div>\n           </div>\n     </div>\n   </div>'], ['<div class="container landing">\n     <div class="row">\n           <div class="col s10 push-s1">\n               <div class="row">\n                   <div class="col m5 hide-on-small-only">\n                       <img class="iphone" src="iphone.png">\n                   </div>\n                   ', '\n              </div>\n           </div>\n     </div>\n   </div>']);
@@ -19151,7 +19152,7 @@ module.exports = function layout(content) {
 },{"../traslate":382,"yo-yo":361}],375:[function(require,module,exports){
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['<div class="card ', '">\n      <div class="card-image">\n        <img class="activator" src="', '">\n      </div>\n      <div class="card-content">\n        <a href="/user/', '" class="card-title">\n          <img src="', '" class="avatar" />\n          <span class="username">', '</span>\n        </a>\n        <small class="right time">', '</small>\n        <p>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart-o" aria-hidden="true"></i></a>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart" aria-hidden="true"></i></a>\n          <span class="left likes">', '</span>\n        </p>\n      </div>\n    </div>'], ['<div class="card ', '">\n      <div class="card-image">\n        <img class="activator" src="', '">\n      </div>\n      <div class="card-content">\n        <a href="/user/', '" class="card-title">\n          <img src="', '" class="avatar" />\n          <span class="username">', '</span>\n        </a>\n        <small class="right time">', '</small>\n        <p>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart-o" aria-hidden="true"></i></a>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart" aria-hidden="true"></i></a>\n          <span class="left likes">', '</span>\n        </p>\n      </div>\n    </div>']);
+var _templateObject = _taggedTemplateLiteral(['<div class="card ', '">\n      <div class="card-image">\n        <img class="activator" src="', '">\n      </div>\n      <div class="card-content">\n        <a href="/', '" class="card-title">\n          <img src="', '" class="avatar" />\n          <span class="username">', '</span>\n        </a>\n        <small class="right time">', '</small>\n        <p>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart-o" aria-hidden="true"></i></a>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart" aria-hidden="true"></i></a>\n          <span class="left likes">', '</span>\n        </p>\n      </div>\n    </div>'], ['<div class="card ', '">\n      <div class="card-image">\n        <img class="activator" src="', '">\n      </div>\n      <div class="card-content">\n        <a href="/', '" class="card-title">\n          <img src="', '" class="avatar" />\n          <span class="username">', '</span>\n        </a>\n        <small class="right time">', '</small>\n        <p>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart-o" aria-hidden="true"></i></a>\n          <a class="left" href="#" onclick=', '><i class="fa fa-heart" aria-hidden="true"></i></a>\n          <span class="left likes">', '</span>\n        </p>\n      </div>\n    </div>']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -19318,4 +19319,106 @@ module.exports = {
     date: new IntlRelativeFormat(locale)
 };
 
-},{"./en-US":380,"./es":381,"intl":346,"intl-messageformat":320,"intl-relativeformat":331,"intl-relativeformat/dist/locale-data/en.js":329,"intl-relativeformat/dist/locale-data/es.js":330,"intl/locale-data/jsonp/en-US.js":348,"intl/locale-data/jsonp/es.js":349}]},{},[372]);
+},{"./en-US":380,"./es":381,"intl":346,"intl-messageformat":320,"intl-relativeformat":331,"intl-relativeformat/dist/locale-data/en.js":329,"intl-relativeformat/dist/locale-data/es.js":330,"intl/locale-data/jsonp/en-US.js":348,"intl/locale-data/jsonp/es.js":349}],383:[function(require,module,exports){
+'use strict';
+
+var _page = require('page');
+
+var _page2 = _interopRequireDefault(_page);
+
+var _header = require('../header');
+
+var _header2 = _interopRequireDefault(_header);
+
+var _title = require('title');
+
+var _title2 = _interopRequireDefault(_title);
+
+var _emptyElement = require('empty-element');
+
+var _emptyElement2 = _interopRequireDefault(_emptyElement);
+
+var _template = require('./template');
+
+var _template2 = _interopRequireDefault(_template);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _page2.default)('/:username', _header2.default, loadUser, function (context, next) {
+    (0, _title2.default)('PlatZiGram - ' + context.params.username);
+    var main = document.getElementById('main-container');
+    (0, _emptyElement2.default)(main).appendChild((0, _template2.default)(context.user));
+});
+
+function loadUser(ctx, next) {
+    return regeneratorRuntime.async(function loadUser$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    _context.prev = 0;
+                    _context.next = 3;
+                    return regeneratorRuntime.awrap(fetch('/api/user/' + ctx.params.username).then(function (res) {
+                        return res.json();
+                    }));
+
+                case 3:
+                    ctx.user = _context.sent;
+
+                    console.log(ctx.user);
+                    next();
+                    _context.next = 11;
+                    break;
+
+                case 8:
+                    _context.prev = 8;
+                    _context.t0 = _context['catch'](0);
+
+                    console.log(_context.t0);
+
+                case 11:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, null, this, [[0, 8]]);
+}
+
+},{"../header":369,"./template":384,"empty-element":319,"page":350,"title":359}],384:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['<div class="container user-page">\n         <div class="row">\n           <div class="col s12 m10 offset-m1 l8 offset-l2 center-align heading">\n             <div class="row">\n               <div class="col s12 m10 offset-m1 l3 offset-l3 center">\n                 <img src="', '" class="responsive-img circle" />\n               </div>\n                <div class="col s12 m10 offset-m1 l6 left-align">\n                 <h2 class="hide-on-large-only center-align">', '</h2>\n                 <h2 class="hide-on-med-and-down left-align">', '</h2>\n               </div>\n             </div>\n           </div>\n            <div class="row">\n            ', '\n            </div>\n         </div>\n  </div>'], ['<div class="container user-page">\n         <div class="row">\n           <div class="col s12 m10 offset-m1 l8 offset-l2 center-align heading">\n             <div class="row">\n               <div class="col s12 m10 offset-m1 l3 offset-l3 center">\n                 <img src="', '" class="responsive-img circle" />\n               </div>\n                <div class="col s12 m10 offset-m1 l6 left-align">\n                 <h2 class="hide-on-large-only center-align">', '</h2>\n                 <h2 class="hide-on-med-and-down left-align">', '</h2>\n               </div>\n             </div>\n           </div>\n            <div class="row">\n            ', '\n            </div>\n         </div>\n  </div>']),
+    _templateObject2 = _taggedTemplateLiteral(['<div class="col s12 m6 l4">\n                    <div class="picture-container">\n                       <img src="', '" class="picture">\n                       <div class="like"><i class="fa fa-heart"></i>', '</div>\n                    </div>\n                    </div>\n                    '], ['<div class="col s12 m6 l4">\n                    <div class="picture-container">\n                       <img src="', '" class="picture">\n                       <div class="like"><i class="fa fa-heart"></i>', '</div>\n                    </div>\n                    </div>\n                    ']);
+
+exports.default = userPageTemplate;
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+var _layout = require('../layout');
+
+var _layout2 = _interopRequireDefault(_layout);
+
+var _traslate = require('../traslate');
+
+var _traslate2 = _interopRequireDefault(_traslate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+//module.exports = landing(signinForm);
+//ponemos el nombre de la funcon para saber si hay un error end onde fue
+function userPageTemplate(user) {
+  var el = (0, _yoYo2.default)(_templateObject, user.avatar, user.username, user.username, user.pictures.map(function (picture) {
+    return (0, _yoYo2.default)(_templateObject2, picture.src, picture.likes);
+  }));
+
+  return (0, _layout2.default)(el);
+}
+
+},{"../layout":374,"../traslate":382,"yo-yo":361}]},{},[372]);
